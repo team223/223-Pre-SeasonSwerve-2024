@@ -148,7 +148,7 @@ public class RobotContainer {
     );*/
 
     //return AutoBuilder.followPathWithEvents(path);
-    return new PathPlannerAuto("turn");
+    return new PathPlannerAuto("test");
     //return new TestGyroAuto(swerve);
   }
 }

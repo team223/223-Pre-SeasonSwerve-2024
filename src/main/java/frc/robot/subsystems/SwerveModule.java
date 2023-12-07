@@ -67,10 +67,13 @@ public class SwerveModule {
   }
 
   public void setDesiredState(SwerveModuleState desiredState, boolean isOpenLoop, boolean overrideSpeedLimit) {
+    
     desiredState =
         OnboardModuleState.optimize(
             desiredState,
-            getState().angle); // Custom optimize command, since default WPILib optimize assumes
+            getState().angle);
+            
+            // Custom optimize command, since default WPILib optimize assumes
     // continuous controller which REV and CTRE are not
 
     this.desiredState = desiredState;
@@ -85,7 +88,9 @@ public class SwerveModule {
           0,
           feedforward.calculate(desiredState.speedMetersPerSecond));
     }
-
+    /*double angle = desiredState.angle.getDegrees(); 
+    angleController.setReference(angle, ControlType.kPosition);
+    lastAngle = angle;*/
     // Prevent rotating module if speed is less then 1%. Prevents Jittering.
     double angle =
         (Math.abs(desiredState.speedMetersPerSecond) <= (Constants.Swerve.maxSpeed * 0.01)) || overrideSpeedLimit

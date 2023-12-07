@@ -92,7 +92,7 @@ public final class Constants {
     public static final double maxSpeed = 4.8; // Meters per second
     public static final double maxAngularVelocity = 11.5;
     public static final double fineDriveSpeed = 4.6 / 5;
-    public static final double maxModuleSpeed = /* temp */ 4.8;
+    public static final double maxModuleSpeed = /* temp */ 6.0;
 
     /* Neutral Modes */
     public static final IdleMode angleNeutralMode = IdleMode.kBrake;
@@ -165,7 +165,7 @@ public final class Constants {
 
     /* Angle Motor PID Values for Auto */
     public static final double AangleKP = //0.05;
-    20;
+    7.5;
     public static final double AangleKI = //0.0001;
     0;
     public static final double AangleKD = //0.0025;
@@ -173,9 +173,9 @@ public final class Constants {
     public static final double AangleKFF = 0.0;
 
     /* Drive Motor PID Values For Auto */
-    public static final double AdriveKP = //0.0001;
-    //0.16579;
+    public static final double AdriveKP = //0.1;
     0.3314;
+    
     public static final double AdriveKI = //0.0;
     0.0003;
     public static final double AdriveKD = //0.0;
