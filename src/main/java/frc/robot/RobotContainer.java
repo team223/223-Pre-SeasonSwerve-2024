@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
@@ -37,7 +38,8 @@ import frc.robot.subsystems.*;
  */
 
 public class RobotContainer {
-  public final SendableChooser<Command> chooser = new SendableChooser<>();
+  private final SendableChooser<Command> chooser;
+  
 
   /* Controllers */
   private final Joystick driver = new Joystick(0);
@@ -52,6 +54,8 @@ public class RobotContainer {
   /* Driver Buttons */  
   private final JoystickButton zeroGyro =
       new JoystickButton(driver, XboxController.Button.kY.value);
+  private final JoystickButton resetPose =
+      new JoystickButton(driver, XboxController.Button.kB.value);
   private final JoystickButton xPattern = 
       new JoystickButton(driver, XboxController.Button.kX.value);
   private final JoystickButton robotCentric =
@@ -75,23 +79,13 @@ public class RobotContainer {
             () -> robotCentric.getAsBoolean(),
             () -> xPattern.getAsBoolean(),
             () -> driver.getPOV()));
-
-    //chooser.setDefaultOption("Example Path", new PathPlannerAuto("Example Auto"));
-    //chooser.addOption("3 Ball", new AutoSwerve(swerve, "threeBall", 3, 2));
-    //chooser.addOption("Square Dance", new CenterOnTarget(swerve));
-
+    chooser = AutoBuilder.buildAutoChooser();
+    SmartDashboard.putData("Auto:", chooser);
+    
     // Configure the button bindings
     configureButtonBindings();
 
     swerve.resetModuleZeros();
-
-    
-
-
-
-
-
-
 
 
   }
@@ -111,11 +105,9 @@ public class RobotContainer {
   private void configureButtonBindings() {
     /* Driver Buttons */
     zeroGyro.toggleOnTrue(new InstantCommand(() -> swerve.zeroGyro(), swerve));
-
+    resetPose.toggleOnTrue(new InstantCommand(() -> swerve.resetPose(new Pose2d()), swerve));
   
-    //used to be telopGoto - Testing just Goto
 
-   // disableBrake.onTrue(new InstantCommand(() -> arm.toggleBrakeDisabled(), arm));
 
 
   }
@@ -126,13 +118,13 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   // An ExampleCommand will run in autonomous
-    //return chooser.getSelected();
+   
      
     
     
   public Command getAutonomousCommand() {
     swerve.zeroGyro();
-    swerve.resetOdometry(new Pose2d());
+    //swerve.resetOdometry(new Pose2d());
     //PathPlannerPath path = PathPlannerPath.fromPathFile("test");
     /*
     List<Translation2d> bezierPoints = PathPlannerPath.bezierFromPoses(
@@ -148,7 +140,9 @@ public class RobotContainer {
     );*/
 
     //return AutoBuilder.followPathWithEvents(path);
-    return new PathPlannerAuto("test");
+    
+
+    return chooser.getSelected();
     //return new TestGyroAuto(swerve);
   }
 }

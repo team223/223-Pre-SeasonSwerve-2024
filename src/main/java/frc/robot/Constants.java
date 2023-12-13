@@ -28,7 +28,7 @@ public final class Constants {
     public static final double wheelBase = Units.inchesToMeters(23);
     public static final double wheelDiameter = Units.inchesToMeters(4.0);
     public static final double wheelCircumference = wheelDiameter * Math.PI;
-    public static final double driveBaseRadius = 19.7;
+    public static final double driveBaseRadius = Units.inchesToMeters(19.7);
 
     public static final double openLoopRamp = 0.25;
     public static final double closedLoopRamp = 0.0;
@@ -56,8 +56,8 @@ public final class Constants {
     public static final int driveContinuousCurrentLimit = 80;
     
     /* Angle Motor PID Values */
-    public static final double angleKP = //0.0005;
-    0.05;
+    public static final double angleKP = //0.05;
+    1;
     public static final double angleKI = //0.0;
     0.0001;
     public static final double angleKD = //0.0;
@@ -92,7 +92,7 @@ public final class Constants {
     public static final double maxSpeed = 4.8; // Meters per second
     public static final double maxAngularVelocity = 11.5;
     public static final double fineDriveSpeed = 4.6 / 5;
-    public static final double maxModuleSpeed = /* temp */ 6.0;
+    public static final double maxModuleSpeed = /* temp */ 5.5;
 
     /* Neutral Modes */
     public static final IdleMode angleNeutralMode = IdleMode.kBrake;
@@ -164,16 +164,16 @@ public final class Constants {
     public static final double kPThetaController = 7;
 
     /* Angle Motor PID Values for Auto */
-    public static final double AangleKP = //0.05;
-    7.5;
-    public static final double AangleKI = //0.0001;
-    0;
-    public static final double AangleKD = //0.0025;
+    public static final double AangleKP = //0.0;
+    10;
+    public static final double AangleKI = //0.0;
+    0.001;
+    public static final double AangleKD = //0.0;
     0;
     public static final double AangleKFF = 0.0;
 
     /* Drive Motor PID Values For Auto */
-    public static final double AdriveKP = //0.1;
+    public static final double AdriveKP = //0.0;
     0.3314;
     
     public static final double AdriveKI = //0.0;

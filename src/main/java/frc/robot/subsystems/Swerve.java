@@ -62,7 +62,7 @@ public class Swerve extends SubsystemBase {
         new PIDConstants(Constants.AutoConstants.AangleKP,Constants.AutoConstants.AangleKI,Constants.AutoConstants.AangleKD),
         Constants.Swerve.maxModuleSpeed,
         Constants.Swerve.driveBaseRadius,
-        new ReplanningConfig(false,true)
+        new ReplanningConfig(true,false)
       ), 
       this
     );
@@ -103,7 +103,8 @@ public class Swerve extends SubsystemBase {
   }
 
    public void resetPose(Pose2d pose) {
-    swerveOdometry.resetPosition(getYaw(), getModulePositions(),pose);
+    swerveOdometry.resetPosition(getYaw(), getModulePositions(), pose);
+    
   }
 
   public void resetOdometry(Pose2d pose) {
