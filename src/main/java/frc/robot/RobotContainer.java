@@ -126,23 +126,18 @@ public class RobotContainer {
     swerve.zeroGyro();
     //swerve.resetOdometry(new Pose2d());
     //PathPlannerPath path = PathPlannerPath.fromPathFile("test");
-    /*
-    List<Translation2d> bezierPoints = PathPlannerPath.bezierFromPoses(
-      new Pose2d(1.0,1.0,Rotation2d.fromDegrees(0)),
-      new Pose2d(3.0,1.0,Rotation2d.fromDegrees(-45))
-      //new Pose2d(5.0,3.0,Rotation2d.fromDegrees(90))
-    );
+    Pose2d startingPose = PathPlannerAuto.getStaringPoseFromAutoFile(chooser.getSelected().getName());
 
-    PathPlannerPath path = new PathPlannerPath(
-      bezierPoints,
-      new PathConstraints(3.0, 3.0, 2*Math.PI, 4*Math.PI),
-      new GoalEndState(0.0, Rotation2d.fromDegrees(-90))
-    );*/
+    return new SequentialCommandGroup(
 
-    //return AutoBuilder.followPathWithEvents(path);
+    new InstantCommand(() -> { swerve.zeroGyro(); swerve.resetOdometry(startingPose); }),
+
+    chooser.getSelected()
+
+  );
     
 
-    return chooser.getSelected();
+    //return chooser.getSelected();
     //return new TestGyroAuto(swerve);
   }
 }
